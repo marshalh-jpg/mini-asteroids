@@ -134,3 +134,29 @@ rule.)
 (user, interactive)
 looks good. commit, push, then move on to base/build be sure to execute
 ralph-loop.sh for this task
+
+================================================================================
+STAGE: Base / Build (ralph loop)
+================================================================================
+
+(ralph loop — scripts/ralph-prompt-build.md, reused unchanged for each of
+the 6 iterations that ran against docs/base-plan.md /
+docs/base-progress.md; see that file for the exact text)
+
+You are one iteration of an autonomous build loop for mini-asteroids, a
+server-authoritative Asteroids game: a Node.js/Express/WebSocket server
+(containerized with Docker) owns all game state and physics; the browser
+client in public/ only renders server state and forwards player input.
+[... task instructions: find the first unchecked task in the given plan
+file, implement it, sanity-check it, check it off, append one progress
+line, do not touch git, do not start a second task — full text in
+scripts/ralph-prompt-build.md]
+
+(implicit — orchestrator step, run after the loop finished with all 6
+tasks checked off: verify the loop's output for real. Ran node -c on the
+changed files, started the server directly and checked /health, /, and
+/game.js, then ran an actual docker build and docker run against the
+image and checked the same endpoints inside the container.)
+
+(user, interactive)
+commit and push, then move on to extension/specify
