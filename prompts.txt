@@ -120,3 +120,17 @@ the very first one and this prompt
 (user, interactive)
 looks good, push then move on to base/plan. also, pause before commiting
 instead of pause before pushing next time and in the future
+
+================================================================================
+STAGE: Base / Plan
+================================================================================
+
+(implicit — carried out per the "Project setup" prompts: write
+docs/base-plan.md, a task checklist derived from docs/base-spec.md for the
+ralph-loop build stage, plus docs/base-progress.md as the loop's progress
+log. Written in ASD-STE100 Simplified Technical English per the standing
+rule.)
+
+(user, interactive)
+looks good. commit, push, then move on to base/build be sure to execute
+ralph-loop.sh for this task
