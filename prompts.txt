@@ -1,0 +1,35 @@
+prompts.txt — every prompt given to an AI agent during this assignment,
+in chronological order, grouped by stage. "Interactive" entries are
+messages given to Claude Code (Sonnet 5) in a normal chat session.
+"Ralph loop" entries are the fixed prompt template repeatedly given to
+headless `claude -p` invocations by scripts/ralph-loop.sh; that template
+lives at scripts/ralph-prompt-build.md and is quoted here once per stage
+rather than once per iteration, since every iteration in a stage receives
+the same base prompt (only the plan/progress file paths appended differ).
+
+================================================================================
+STAGE: Initial scaffold (rewrite of the repo's initial commit)
+AGENT: Claude Code, interactive
+================================================================================
+
+I want a simple asteroids game. To make it non-trivial, the game itself
+should run in a docker container server, with the front end being quite
+small — server authoritative. It should start out pretty simple for the
+"Base" step, then for the "Extension" step it should add a set of levels
+with different enemies and power-ups.
+
+Loop mechanism: a ralph-wiggum-style script that repeatedly invokes the AI
+headlessly against a task/progress file until done, one commit per stage.
+
+Target repo: https://github.com/marshalh-jpg/mini-asteroids (public). Amend
+the existing initial commit into a more realistic starting framework, then
+add exactly 3 commits for the base step (specify, plan, build) and 3 commits
+for the extension step (specify, plan, build) — 7 commits total, clean and
+minimal, mapping to the assignment rubric.
+
+[Follow-up, interactive] Build the scaffold: package.json, Dockerfile,
+.dockerignore, a minimal Express + ws server.js that serves public/ and
+responds on /health, a thin public/index.html + style.css + game.js that
+connects over WebSocket, scripts/ralph-loop.sh + scripts/ralph-prompt-build.md
+for the build loop, and an updated README/.gitignore/running.md. Amend the
+existing initial commit with this content.
