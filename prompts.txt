@@ -160,3 +160,18 @@ image and checked the same endpoints inside the container.)
 
 (user, interactive)
 commit and push, then move on to extension/specify
+
+================================================================================
+STAGE: Extension / Specify
+================================================================================
+
+(implicit — carried out per the "Project setup" prompts: write
+docs/extension-spec.md, requirements for 3 features on top of the base
+game — levels with a concrete difficulty formula, a saucer enemy that
+moves and fires at the ship, and 3 power-up types (shield, rapid fire,
+extra life) with a drop chance off destroyed asteroids — plus client and
+non-goals sections. Written in ASD-STE100 Simplified Technical English per
+the standing rule.)
+
+(user, interactive)
+looks good, commit. move onto extension/plan
