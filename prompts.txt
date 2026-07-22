@@ -1,35 +1,122 @@
 prompts.txt — every prompt given to an AI agent during this assignment,
-in chronological order, grouped by stage. "Interactive" entries are
-messages given to Claude Code (Sonnet 5) in a normal chat session.
-"Ralph loop" entries are the fixed prompt template repeatedly given to
-headless `claude -p` invocations by scripts/ralph-loop.sh; that template
-lives at scripts/ralph-prompt-build.md and is quoted here once per stage
-rather than once per iteration, since every iteration in a stage receives
-the same base prompt (only the plan/progress file paths appended differ).
+in the order given. Entries marked "(user, interactive)" are verbatim
+messages typed by the user to Claude Code (Sonnet 5) in a normal chat
+session. Entries marked "(ralph loop)" are the fixed prompt template given
+to headless `claude -p` invocations by scripts/ralph-loop.sh; the template
+lives at scripts/ralph-prompt-build.md and is quoted here once per stage,
+not once per iteration, because every iteration in a stage receives the
+same base prompt (only the plan/progress file paths appended differ).
+
+================================================================================
+STAGE: Project setup (before any stage-specific work)
+================================================================================
+
+(user, interactive)
+I am doing this assignment
+
+(user, interactive)
+Choose an AI assistant and some loop engineering code.  You can obtain
+Github CoPilot with some free credits with a CMU student email address,
+and that may be sufficient for the homework.  We cannot guarantee that you
+will have a good experience with free models but you are welcome to try.
+If neither of the aforementioned solutions works, a 1-month frontier model
+subscription in the $20-$40 range should be enough to do this assignment
+and the next one, at less than the cost of a typical textbook (and the
+textbook for this class was freely available).  The assignment was
+prototyped with a $40 GitHub CoPilot+ subscription and the loop shown in
+class (https://github.com/gwincr11/ralph-wiggum-tutorial), but you can use
+other AIs or another loop if you wish.
+
+Use the AI assistant and the loop to build something nontrivial.  An
+example of nontrivial would be a small website with an interactive
+backend, like the game shown in class.  But choose something that is not
+just an exactly clone of something already built.  Follow the following
+procedure:
+
+You should use version control through a site such as github.  Either
+your repository must be public, or you must give the instructor and TA
+access (github:JonathanAldrich, jonathan.aldrich@cs.cmu.edu;
+github:Saat98, saula@andrew.cmu.edu).
+You should build something in two steps: first a base system, then an
+extension.
+Each step should be done in at least 3 stages.  Examples of stages might
+be specify, review, plan, design, and build.  We used specify, review,
+plan, and build in the example from class.
+You must use a loop for at least one stage.  We used a loop for plan and
+build in the example from class.
+You must commit the state of your repository after every stage of every
+step.  That means at least 6 commits, since you have 2 steps and 3 stages
+for each.
+Your repository must include the following additional files:
+prompts.txt - all of your prompts (any command you give to an agent)
+running.md - explains how to run the thing you built, in a way that a TA
+could easily reproduce
+reflection.md - 1 paragraph on something interesting you learned from the
+exercise related to software engineering
+Turn in a link to your repository, accessible to the instructor and TA
+
+(user, interactive — answer to clarifying question "what should the
+project be?")
+I want a simple asteroids game. To make it non-trivial, the game itself
+should be running in a docker container server, with the front end being
+quite small. I believe the term is server authoritative but I could be
+wrong. It should start out pretty simple for the "Base" step, then for the
+"Extension" step, it should add a set of levels with different enemies and
+power ups.
+
+(user, interactive — answer to clarifying question "how should the loop
+be implemented?")
+Ralph-wiggum-style script (Recommended)
+
+(user, interactive — answer to clarifying question "which repo, and is it
+public / accessible?")
+Yes this is the repo. There should be 7 total commits at the end. First
+there is the initial which has a rough framework. feel free to change
+this initial commit to be a more realistic framework for whatever you are
+planning. The next three commits should be the specify, plan, build loop
+for the base. The the last three commits are specify, plan, build loop
+for the extension. These commits should be clean and minimal, mapping
+closely to the assignment rubric. Its a public repo
 
 ================================================================================
 STAGE: Initial scaffold (rewrite of the repo's initial commit)
-AGENT: Claude Code, interactive
 ================================================================================
 
-I want a simple asteroids game. To make it non-trivial, the game itself
-should run in a docker container server, with the front end being quite
-small — server authoritative. It should start out pretty simple for the
-"Base" step, then for the "Extension" step it should add a set of levels
-with different enemies and power-ups.
+(implicit — carried out per the "Project setup" prompts above: build a
+runnable scaffold — package.json, Dockerfile, .dockerignore, a minimal
+Express + ws server.js that serves public/ and responds on /health, a
+thin public/index.html + style.css + game.js that connects over
+WebSocket, scripts/ralph-loop.sh + scripts/ralph-prompt-build.md for the
+build loop, and an updated README/.gitignore/running.md — then amend the
+existing initial commit with this content.)
 
-Loop mechanism: a ralph-wiggum-style script that repeatedly invokes the AI
-headlessly against a task/progress file until done, one commit per stage.
+(user, interactive)
+close out all things running in docker. there must be something hogging
+it
 
-Target repo: https://github.com/marshalh-jpg/mini-asteroids (public). Amend
-the existing initial commit into a more realistic starting framework, then
-add exactly 3 commits for the base step (specify, plan, build) and 3 commits
-for the extension step (specify, plan, build) — 7 commits total, clean and
-minimal, mapping to the assignment rubric.
+(user, interactive)
+also after each commit is ready to push, pause and let me review
 
-[Follow-up, interactive] Build the scaffold: package.json, Dockerfile,
-.dockerignore, a minimal Express + ws server.js that serves public/ and
-responds on /health, a thin public/index.html + style.css + game.js that
-connects over WebSocket, scripts/ralph-loop.sh + scripts/ralph-prompt-build.md
-for the build loop, and an updated README/.gitignore/running.md. Amend the
-existing initial commit with this content.
+(user, interactive)
+go ahead and revise the initial commit, but pause just before pushing
+commit 2 (base/specify)
+
+================================================================================
+STAGE: Base / Specify
+================================================================================
+
+(implicit — carried out per the "Project setup" prompts: write
+docs/base-spec.md, the requirements and architecture for the base step.)
+
+(user, interactive)
+base-spec needs to be more technical, the "genuinely" type of verbiage
+needs to be removed. all documentation must adhere to ADS-STE100
+Simplified Technical English
+
+(user, interactive)
+side note, record all of my prompts in prompts.txt as we go, including
+the very first one and this prompt
+
+(user, interactive)
+looks good, push then move on to base/plan. also, pause before commiting
+instead of pause before pushing next time and in the future
