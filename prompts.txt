@@ -175,3 +175,16 @@ the standing rule.)
 
 (user, interactive)
 looks good, commit. move onto extension/plan
+
+================================================================================
+STAGE: Extension / Plan
+================================================================================
+
+(implicit — carried out per the "Project setup" prompts: write
+docs/extension-plan.md, a 7-task checklist derived from
+docs/extension-spec.md for the ralph-loop build stage, plus
+docs/extension-progress.md as the loop's progress log. Written in
+ASD-STE100 Simplified Technical English per the standing rule.)
+
+(user, interactive)
+looks good, commit and move onto extension/build
