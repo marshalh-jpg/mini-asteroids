@@ -188,3 +188,27 @@ ASD-STE100 Simplified Technical English per the standing rule.)
 
 (user, interactive)
 looks good, commit and move onto extension/build
+
+================================================================================
+STAGE: Extension / Build (ralph loop)
+================================================================================
+
+(ralph loop — scripts/ralph-prompt-build.md, reused unchanged for each of
+the 7 iterations that ran against docs/extension-plan.md /
+docs/extension-progress.md; full text in scripts/ralph-prompt-build.md,
+same template the base build stage used)
+
+(implicit — orchestrator step, run after the loop finished with all 7
+tasks checked off: verify the loop's output for real. Ran node -c on the
+changed files; ran the level/speed formulas, level-up-on-clear, saucer
+spawn, and power-up spawn directly against the Game class in isolation
+and confirmed the expected values; started the server directly and
+checked /health, /, and /game.js; ran an actual docker build and docker
+run against the image and checked the same endpoints in the container.
+Wrote reflection.md: a paragraph on the loop's build stage repeatedly
+marking Docker verification "done" by static review instead of actually
+running the build.)
+
+(user, interactive)
+I removed the reflection because I want to write that myself. otherwise,
+commit all changes and push

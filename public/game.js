@@ -8,6 +8,20 @@ const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 
 const SHIP_DRAW_RADIUS = 12; // cosmetic only, matches server SHIP_RADIUS
+const POWERUP_DRAW_RADIUS = 10; // cosmetic only, matches server POWERUP_RADIUS
+const TICK_RATE = 30; // cosmetic only, matches server tick rate, used to show seconds left
+
+const POWERUP_LABELS = {
+  shield: 'S',
+  rapidFire: 'R',
+  extraLife: '+',
+};
+
+const POWERUP_COLORS = {
+  shield: '#08f',
+  rapidFire: '#fa0',
+  extraLife: '#f0f',
+};
 
 const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
 const ws = new WebSocket(`${protocol}//${location.host}`);
@@ -108,13 +122,57 @@ function drawBullets(state) {
   });
 }
 
+function drawSaucer(state) {
+  if (!state.saucer) return;
+  ctx.strokeStyle = '#f0f';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(state.saucer.x, state.saucer.y, state.saucer.radius, 0, Math.PI * 2);
+  ctx.stroke();
+}
+
+function drawSaucerBullets(state) {
+  ctx.fillStyle = '#f80';
+  state.saucerBullets.forEach((bullet) => {
+    ctx.beginPath();
+    ctx.arc(bullet.x, bullet.y, 2, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function drawPowerups(state) {
+  ctx.font = '12px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  state.powerups.forEach((powerup) => {
+    const color = POWERUP_COLORS[powerup.type] || '#fff';
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(powerup.x, powerup.y, POWERUP_DRAW_RADIUS, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fillStyle = color;
+    ctx.fillText(POWERUP_LABELS[powerup.type] || '?', powerup.x, powerup.y);
+  });
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+}
+
 function drawHud(state) {
   ctx.fillStyle = '#0f0';
   ctx.font = '16px monospace';
   ctx.textAlign = 'left';
   ctx.fillText(`Score: ${state.score}`, 12, 20);
+  ctx.fillText(`Level: ${state.level}`, 12, 40);
   ctx.textAlign = 'right';
   ctx.fillText(`Lives: ${state.lives}`, state.width - 12, 20);
+
+  if (state.activePowerup) {
+    const secondsLeft = Math.ceil(state.activePowerup.ticksLeft / TICK_RATE);
+    const label = POWERUP_LABELS[state.activePowerup.type] || state.activePowerup.type;
+    ctx.fillStyle = POWERUP_COLORS[state.activePowerup.type] || '#0f0';
+    ctx.fillText(`${label} ${secondsLeft}s`, state.width - 12, 40);
+  }
   ctx.textAlign = 'left';
 
   if (state.gameOver) {
@@ -129,6 +187,9 @@ function render(state) {
   ctx.clearRect(0, 0, state.width, state.height);
   drawAsteroids(state);
   drawBullets(state);
+  drawSaucer(state);
+  drawSaucerBullets(state);
+  drawPowerups(state);
   drawShip(state);
   drawHud(state);
 }
