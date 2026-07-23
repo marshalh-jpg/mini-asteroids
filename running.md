@@ -1,83 +1,59 @@
 # Running mini-asteroids
 
-Current state: the base game and the extension step are implemented. The
-server controls the ship, the asteroids, the bullets, the score, the lives
-count, the level, the saucer, the saucer bullets, and the power-ups. The
-client only draws the state that the server sends.
+## Prerequisites
 
-## Option A: Docker (recommended)
+Install Docker. Any OS with Docker works: Windows, macOS, or Linux.
 
-Use this procedure to build and run the game in Docker.
+## Run the game
 
-1. Build the image:
+1. Open a terminal in the repository root.
+2. Build the image:
 
    ```
    docker build -t mini-asteroids .
    ```
 
-2. Run the container:
+3. Run the container:
 
    ```
    docker run --rm -p 3000:3000 mini-asteroids
    ```
 
-3. Open http://localhost:3000 in a browser.
+4. Open http://localhost:3000 in a browser.
 
-No other setup step is necessary. The container needs no environment
-variables and no external database.
+To stop the game, press Ctrl+C in the terminal.
 
-## Option B: Node directly
+## Controls
 
-This option requires Node.js 18 or later.
+| Key                  | Action |
+| --------------------- | ------ |
+| Left arrow / A         | Rotate left |
+| Right arrow / D        | Rotate right |
+| Up arrow / W            | Thrust |
+| Space                  | Fire |
 
-1. Install the dependencies:
 
-   ```
-   npm install
-   ```
+## How to confirm it works
 
-2. Start the server:
+Do these steps in order after a build. Each step must produce the result
+stated.
 
-   ```
-   npm start
-   ```
-
-3. Open http://localhost:3000 in a browser.
-
-## Playtest checklist
-
-Use this checklist to confirm the game works after a build.
-
-1. Open the game page. Confirm the ship, the asteroids, the score, and the
-   lives count appear on the canvas.
-2. Press the left and right arrow keys. Confirm the ship rotates.
-3. Press the up arrow key. Confirm the ship thrusts and drifts with light
-   drag.
-4. Press the space key. Confirm the ship fires a bullet.
-5. Destroy an asteroid with a bullet. Confirm the score increases.
-6. Let an asteroid hit the ship. Confirm the lives count decreases by one
-   and the ship respawns at the center of the screen.
-7. Lose all lives. Confirm the game-over state shows.
-
-## Extension playtest checklist
-
-Use this checklist to confirm the level, saucer, and power-up features work
-after a build.
-
-1. Start a game. Destroy every asteroid in level 1. Confirm the level
-   number rises to 2. Confirm the HUD shows the new level number.
-2. Stay in level 2 or higher. Confirm a saucer appears, moves in a
-   straight line, and fires bullets at the ship.
-3. Destroy the saucer with a bullet. Confirm the score rises.
-4. Let a saucer or a saucer bullet hit the ship. Confirm the lives count
-   decreases by one, the same as an asteroid hit.
-5. Collect a shield power-up. Confirm the ship stays invulnerable for the
-   fixed duration.
-6. Collect a rapid-fire power-up. Confirm the fire cooldown is shorter for
-   the fixed duration.
-7. Collect an extra-life power-up. Confirm the lives count rises by 1
-   right away.
-
-## Health check
-
-`GET /health` returns `{"status":"ok"}` once the server is up.
+1. Open the game page. The ship, the asteroids, the score, and the lives
+   count appear on the canvas.
+2. Rotate, thrust, and fire. The ship turns, drifts forward, and shoots a
+   bullet.
+3. Destroy an asteroid with a bullet. The score goes up.
+4. Let an asteroid hit the ship. The lives count goes down by one, and the
+   ship respawns at the center of the screen.
+5. Destroy every asteroid on the screen. The level number goes up, and a
+   new set of asteroids appears.
+6. Stay in level 2 or higher for about 10 seconds. A saucer enters the
+   screen, moves, and fires at the ship.
+7. Destroy the saucer with a bullet. The score goes up again.
+8. Let a saucer or a saucer bullet hit the ship. The lives count goes down
+   by one, the same as an asteroid hit.
+9. Fly over a power-up (a labeled ring). One of 3 effects happens: the
+   ship becomes briefly invulnerable (shield), the fire rate goes up for a
+   short time (rapid fire), or the lives count goes up by 1 right away
+   (extra life).
+10. Lose all lives. The screen shows "GAME OVER".

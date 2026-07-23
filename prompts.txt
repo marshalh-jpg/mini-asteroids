@@ -212,3 +212,23 @@ running the build.)
 (user, interactive)
 I removed the reflection because I want to write that myself. otherwise,
 commit all changes and push
+
+================================================================================
+STAGE: Post-submission cleanup (not one of the 7 rubric commits)
+================================================================================
+
+(user, interactive)
+can you rename the last six commits to be a little more descriptive? keep
+the base/extension specify/plan/build part, just add details
+
+(user, interactive)
+looks good
+
+(user, interactive)
+rewrite runningm.md so its simple and easy for a teaching assistant
+grader to follow on any machine
+
+(user, interactive — after trimming the draft down further: removed the
+port-3000-busy workaround, the no-Docker Node alternative, and the health
+check section)
+make a small commit for running.md
